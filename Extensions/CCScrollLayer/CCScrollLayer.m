@@ -76,6 +76,7 @@ enum
 @synthesize pagesWidthOffset = pagesWidthOffset_;
 @synthesize pages = layers_;
 @synthesize stealTouches = stealTouches_;
+@synthesize bounceScroll = bounceScroll_;
 
 @dynamic totalScreens;
 - (int) totalScreens
@@ -103,6 +104,8 @@ enum
 		
 		self.stealTouches = YES;
 		
+		self.bounceScroll = NO;
+
 		// Set default minimum touch length to scroll.
 		self.minimumTouchLengthToSlide = 30.0f;
 		self.minimumTouchLengthToChangePage = 100.0f;
@@ -244,6 +247,10 @@ enum
     }
 
 	id changePage = [CCMoveTo actionWithDuration:0.3 position: [self positionForPageWithNumber: page]];
+	if (self.bounceScroll)
+	{
+		changePage = [CCEaseBackOut actionWithAction:changePage];
+	}
 	changePage = [CCSequence actions: changePage,[CCCallFunc actionWithTarget:self selector:@selector(moveToPageEnded)], nil];
     [self runAction:changePage];
     currentScreen_ = page;

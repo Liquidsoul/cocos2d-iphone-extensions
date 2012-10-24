@@ -84,6 +84,8 @@
 	
 	BOOL stealTouches_;
 	
+	BOOL bounceScroll_;
+
 #ifdef __IPHONE_OS_VERSION_MAX_ALLOWED
 	// Holds the touch that started the scroll
 	UITouch *scrollTouch_;
@@ -123,6 +125,11 @@
  * Default is YES.
  */
 @property(readwrite) BOOL stealTouches;
+
+/** Animation property. If set to YES, scroll animation will have a bounce effect.
+ * (Default value is NO)
+ */
+@property(readwrite) BOOL bounceScroll;
 
 #pragma mark Pages Indicator Properties
 
